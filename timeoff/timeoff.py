@@ -3,7 +3,8 @@ from typing import List
 
 import requests
 
-from model import TimeOffRequest, TimeOffRequestSchema, ChangeTimeOffRequestStatus, ChangeTimeOffRequestStatusSchema
+from model import TimeOffRequest, ChangeTimeOffRequestStatus
+from bamboohr_schema import TimeOffRequestSchema, ChangeTimeOffRequestStatusSchema
 
 import wikiquote
 
@@ -15,7 +16,11 @@ CHANGE_REQUEST_STATUS_URL = "/api/gateway.php/{0}/v1/time_off/requests/{1}/statu
 def get_time_off_requests() -> List[TimeOffRequest]:
     headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
     resp = requests.get(HOST + GET_REQUESTS_URL, headers=headers)
-    return TimeOffRequestSchema().load(resp.json(), many=True).data
+
+    if resp.status_code == 200:
+        return TimeOffRequestSchema().load(resp.json(), many=True).data
+    else:
+        raise requests.ConnectionError("Expected status code 200, but got {}".format(resp.status_code))
 
 
 def approve_request(request_id: str) -> bool:

@@ -1,0 +1,177 @@
+[
+  {
+    "id": "15325",
+    "employeeId": "22",
+    "status": {
+      "lastChanged": "2017-07-22",
+      "lastChangedByUserId": "2603",
+      "status": "canceled"
+    },
+    "name": "Prof X",
+    "start": "2017-07-24",
+    "end": "2017-07-25",
+    "created": "2017-07-20",
+    "type": {
+      "id": "13",
+      "name": "RTT",
+      "icon": "time-off-luggage"
+    },
+    "amount": {
+      "unit": "days",
+      "amount": "2"
+    },
+    "actions": {
+      "view": true,
+      "edit": false,
+      "cancel": false,
+      "approve": false,
+      "deny": false,
+      "bypass": false
+    },
+    "dates": {
+      "2017-07-24": "1",
+      "2017-07-25": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "35612",
+    "employeeId": "22",
+    "status": {
+      "lastChanged": "2018-08-14",
+      "lastChangedByUserId": "2603",
+      "status": "requested"
+    },
+    "name": "Prof X",
+    "start": "2018-08-16",
+    "end": "2018-08-17",
+    "created": "2018-07-20",
+    "type": {
+      "id": "16",
+      "name": "1. Paid Leave (Previous Year - TO BE TAKEN FIRST)",
+      "icon": "time-off-luggage"
+    },
+    "amount": {
+      "unit": "days",
+      "amount": "2"
+    },
+    "actions": {
+      "view": true,
+      "edit": false,
+      "cancel": false,
+      "approve": true,
+      "deny": false,
+      "bypass": false
+    },
+    "dates": {
+      "2018-08-16": "1",
+      "2018-08-17": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "11809",
+    "employeeId": "123456",
+    "status": {
+      "lastChanged": "2017-04-29",
+      "lastChangedByUserId": "2964",
+      "status": "canceled"
+    },
+    "name": "Mary Jane",
+    "start": "2017-05-02",
+    "end": "2017-05-05",
+    "created": "2017-04-27",
+    "type": {
+      "id": "13",
+      "name": "RTT",
+      "icon": "time-off-luggage"
+    },
+    "amount": {
+      "unit": "days",
+      "amount": "4"
+    },
+    "actions": {
+      "view": true,
+      "edit": false,
+      "cancel": false,
+      "approve": false,
+      "deny": false,
+      "bypass": false
+    },
+    "dates": {
+      "2017-05-02": "1",
+      "2017-05-03": "1",
+      "2017-05-04": "1",
+      "2017-05-05": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "29859",
+    "employeeId": "11321",
+    "status": {
+      "lastChanged": "2017-08-01",
+      "lastChangedByUserId": "3192",
+      "status": "canceled"
+    },
+    "name": "John Doe",
+    "start": "2017-08-14",
+    "end": "2017-08-14",
+    "created": "2017-07-25",
+    "type": {
+      "id": "13",
+      "name": "RTT",
+      "icon": "time-off-luggage"
+    },
+    "amount": {
+      "unit": "days",
+      "amount": "1"
+    },
+    "actions": {
+      "view": true,
+      "edit": false,
+      "cancel": false,
+      "approve": false,
+      "deny": false,
+      "bypass": false
+    },
+    "dates": {
+      "2017-08-14": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "35595",
+    "employeeId": "11321",
+    "status": {
+      "lastChanged": "2018-07-26",
+      "lastChangedByUserId": "3192",
+      "status": "approved"
+    },
+    "name": "John Doe",
+    "start": "2018-07-27",
+    "end": "2018-07-27",
+    "created": "2018-07-19",
+    "type": {
+      "id": "16",
+      "name": "1. Paid Leave (Previous Year - TO BE TAKEN FIRST)",
+      "icon": "time-off-luggage"
+    },
+    "amount": {
+      "unit": "days",
+      "amount": "1"
+    },
+    "actions": {
+      "view": true,
+      "edit": false,
+      "cancel": false,
+      "approve": false,
+      "deny": false,
+      "bypass": false
+    },
+    "dates": {
+      "2018-07-27": "1"
+    },
+    "notes": []
+  }
+]
