@@ -1,6 +1,6 @@
 from bamboohr_api import BambooHR
 
-bamboohr = BambooHR()
+bamboohr = BambooHR('your company id', 'your api key')
 
 request_list = bamboohr.get_time_off_requests()
 
