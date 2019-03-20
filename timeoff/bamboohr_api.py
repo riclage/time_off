@@ -19,7 +19,7 @@ class Request(Enum):
 class BambooHR(object):
 
     def __init__(self, company_id: str, api_key: str):
-        self.headers = {'Accept': 'application/json'}
+        self.headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
         self.api_key = api_key
         self.base_url = 'https://api.bamboohr.com/api/gateway.php/{0}/v1/'.format(company_id)
 

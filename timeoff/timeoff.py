@@ -8,3 +8,5 @@ for request in request_list:
     if request.is_auto_approvable():
         if bamboohr.approve_request(request.id):
             print("Approved request id {0}".format(request.id))
+        else:
+            print("Failed to approve request id {0}".format(request.id))
