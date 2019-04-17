@@ -26,14 +26,16 @@ class TimeOffRequestStatus(Enum):
 
 
 class TimeOffRequest(object):
-    def __init__(self, request_id: str, employee_id: str, status: TimeOffRequestStatus, amount: Amount):
+    def __init__(self, request_id: str, employee_id: str, name: str, status: TimeOffRequestStatus,
+                 amount: Amount):
         self.id = request_id
         self.employee_id = employee_id
+        self.employee_name = name
         self.status = status
         self.amount = amount
 
     def is_auto_approvable(self) -> bool:
         return True if self.status == TimeOffRequestStatus.requested \
                        and self.amount.unit == AmountUnit.days \
-                       and self.amount.amount <= 5 \
+                       and self.amount.amount <= 3 \
             else False

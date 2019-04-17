@@ -29,6 +29,7 @@ class TimeOffRequestStatusSchema(Schema):
 class TimeOffRequestSchema(Schema):
     id = fields.Str(attribute="request_id")
     employeeId = fields.Str(attribute="employee_id")
+    name = fields.Str(attribute="name")
     status = fields.Nested(TimeOffRequestStatusSchema())
     amount = fields.Nested(AmountSchema())
 
