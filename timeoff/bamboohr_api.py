@@ -8,15 +8,21 @@ from requests import Response
 from model import TimeOffRequest, ChangeTimeOffRequestStatus
 from bamboohr_schema import TimeOffRequestSchema, ChangeTimeOffRequestStatusSchema
 
-import wikiquote
-
 
 class Request(Enum):
     get = 'get'
     put = 'put'
 
 
-class BambooHR(object):
+class HrApi(object):
+    def get_time_off_requests(self) -> List[TimeOffRequest]:
+        raise NotImplementedError('implemented in subclass')
+
+    def approve_request(self, request_id: str, note: str) -> bool:
+        raise NotImplementedError('implemented in subclass')
+
+
+class BambooHr(HrApi):
 
     def __init__(self, company_id: str, api_key: str):
         self.headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
@@ -38,10 +44,7 @@ class BambooHR(object):
 
         return TimeOffRequestSchema().load(resp.json(), many=True).data
 
-    def approve_request(self, request_id: str) -> bool:
-        quote = wikiquote.quote_of_the_day()
-        note = "\"{0}\" [{1}]".format(quote[0], quote[1])
-
+    def approve_request(self, request_id: str, note: str) -> bool:
         change_request = ChangeTimeOffRequestStatus('approved', note)
         data = ChangeTimeOffRequestStatusSchema().dump(change_request).data
 

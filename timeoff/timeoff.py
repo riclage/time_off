@@ -1,18 +1,17 @@
-from bamboohr_api import BambooHR
+from bamboohr_api import BambooHr
+from use_cases import GetQuoteOfTheDayUseCase, AutoApproveRequestsUseCase
 
-bamboohr = BambooHR('your company id', 'your api key')
 
-request_list = bamboohr.get_time_off_requests()
+def main():
+    hr_api = BambooHr('your company id', 'your api key')
+    quotes_use_case = GetQuoteOfTheDayUseCase()
+    auto_approve_use_case = AutoApproveRequestsUseCase(hr_api, quotes_use_case)
 
-status_msgs = []
-for request in request_list:
-    if request.is_auto_approvable():
-        if bamboohr.approve_request(request.id):
-            status_msgs.append("Approved request id {0} from {1}".format(request.id, request.employee_name))
-        else:
-            status_msgs.append("Failed to approve request id {0} from {1}".format(request.id, request.employee_name))
-    else:
-        status_msgs.append("Request id {0} from {1} is not auto-approvable".format(request.id, request.employee_name))
+    status_msgs = auto_approve_use_case.auto_approve_requests()
 
-for msg in status_msgs:
-    print(msg)
+    for msg in status_msgs:
+        print(msg)
+
+
+if __name__ == "__main__":
+    main()
