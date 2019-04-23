@@ -31,12 +31,12 @@ class TestModel(unittest.TestCase):
         self.assertEqual(requests[4].id, '35595')
 
     def test_is_too_many_days(self):
-        long_request = TimeOffRequest('1', '1', TimeOffRequestStatus.requested, Amount(AmountUnit.days, 6))
+        long_request = TimeOffRequest('1', '1', "John", TimeOffRequestStatus.requested, Amount(AmountUnit.days, 6))
         self.assertEqual(long_request.is_auto_approvable(), False)
 
     def test_is_requested_state(self):
         for s in TimeOffRequestStatus:
-            req = TimeOffRequest('1', '1', s, Amount(AmountUnit.days, 4))
+            req = TimeOffRequest('1', '1', "John", s, Amount(AmountUnit.days, 3))
             self.assertEqual(req.is_auto_approvable(), s == TimeOffRequestStatus.requested)
 
 
