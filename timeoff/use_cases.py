@@ -2,9 +2,33 @@ import enum
 from enum import Enum
 from typing import List, Tuple
 
+import requests
 import wikiquote
 
 from bamboohr_api import HrApi
+
+
+class EmailApi(object):
+    def send_email(self, from_address: str, to_address: str, to_name: str, title: str, body: str) -> bool:
+        raise NotImplementedError('implemented in subclass')
+
+
+class MailGunEmailApi(EmailApi):
+
+    def __init__(self, post_url: str, api_key: str):
+        self.post_url = post_url
+        self.api_key = api_key
+
+    def send_email(self, from_address: str, to_address: str, to_name: str, title: str, body: str) -> bool:
+        result = requests.post(
+            "{0}/messages".format(self.post_url),
+            auth=("api", self.api_key),
+            data={"from": from_address,
+                  "to": [to_address, to_name],
+                  "subject": title,
+                  "text": body})
+
+        return result.status_code == 200
 
 
 class QuoteApi(object):
@@ -63,3 +87,16 @@ class AutoApproveRequestsUseCase(object):
                                                                              request.employee_name)))
 
         return status_msgs
+
+
+class ReportAutoApproveResultUseCase(object):
+
+    def __init__(self, email_api: EmailApi):
+        self.email_api = email_api
+
+    def report_results(self, results: List[Tuple[AutoApproveResult, str]]):
+        if len(results) == 0:
+            print("Nothing to approve")
+        else:
+            msgs = ["[{0}] {1}".format(status.name, msg) for status, msg in results]
+            print("\n".join(msgs))

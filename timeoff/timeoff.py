@@ -1,19 +1,18 @@
 from bamboohr_api import BambooHr
-from use_cases import GetQuoteOfTheDayUseCase, AutoApproveRequestsUseCase, WikiQuoteApi
+from use_cases import GetQuoteOfTheDayUseCase, AutoApproveRequestsUseCase, WikiQuoteApi, MailGunEmailApi, \
+    ReportAutoApproveResultUseCase
 
 
 def main():
     hr_api = BambooHr('your company id', 'your api key')
-    quotes_use_case = GetQuoteOfTheDayUseCase()
+    quotes_use_case = GetQuoteOfTheDayUseCase(WikiQuoteApi())
     auto_approve_use_case = AutoApproveRequestsUseCase(hr_api, quotes_use_case)
 
-    status_msgs = auto_approve_use_case.auto_approve_requests()
+    email_api = MailGunEmailApi("your post url", "your api key")
+    report_use_case = ReportAutoApproveResultUseCase(email_api)
 
-    if len(status_msgs) == 0:
-        print("Nothing to approve")
-    else:
-        for msg in status_msgs:
-            print(msg[1])
+    status_msgs = auto_approve_use_case.auto_approve_requests()
+    report_use_case.report_results(status_msgs)
 
 
 if __name__ == "__main__":
