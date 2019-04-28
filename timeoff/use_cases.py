@@ -94,9 +94,21 @@ class ReportAutoApproveResultUseCase(object):
     def __init__(self, email_api: EmailApi):
         self.email_api = email_api
 
-    def report_results(self, results: List[Tuple[AutoApproveResult, str]]):
+    def report_results(self, results: List[Tuple[AutoApproveResult, str]], report_to_email: str, report_to_name: str):
         if len(results) == 0:
             print("Nothing to approve")
         else:
             msgs = ["[{0}] {1}".format(status.name, msg) for status, msg in results]
-            print("\n".join(msgs))
+            msg_to_send = "\n".join(msgs)
+            print(msg_to_send)
+
+            send_email_result = self.email_api.send_email(
+                "no-reply@nobody.com",
+                report_to_email,
+                report_to_name,
+                "Time Off Auto Approve Results",
+                msg_to_send
+            )
+
+            if not send_email_result:
+                print("Failed to report results by email")

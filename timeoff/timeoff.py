@@ -3,6 +3,9 @@ from use_cases import GetQuoteOfTheDayUseCase, AutoApproveRequestsUseCase, WikiQ
     ReportAutoApproveResultUseCase
 
 
+# TODOs:
+# - Report type of auto-approval (RTT, w@h, etc.)
+# - Support for multiple BambooHr accounts
 def main():
     hr_api = BambooHr('your company id', 'your api key')
     quotes_use_case = GetQuoteOfTheDayUseCase(WikiQuoteApi())
@@ -12,7 +15,7 @@ def main():
     report_use_case = ReportAutoApproveResultUseCase(email_api)
 
     status_msgs = auto_approve_use_case.auto_approve_requests()
-    report_use_case.report_results(status_msgs)
+    report_use_case.report_results(status_msgs, "email@domain.com", "Your Name")
 
 
 if __name__ == "__main__":
