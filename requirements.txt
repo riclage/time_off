@@ -1,3 +1,4 @@
 marshmallow==2.19.2
 typing==3.6.6
 wikiquote==0.1.12
+requests==2.20.0
